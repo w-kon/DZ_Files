@@ -1,4 +1,6 @@
 
+# Задача №1
+
 def dictionary_list(list_recipes):
     cook_book = {}
     title = ['ingredient_name', 'quantity', 'measure']
@@ -12,9 +14,26 @@ def dictionary_list(list_recipes):
                 cook_book[key].append(dict(zip(title, line)))
     return cook_book
 
-with open('recipes.txt', 'r', encoding='utf-8') as file:
-    print(dictionary_list(file))
+def open_recipes():
+    with open('recipes.txt', 'r', encoding='utf-8') as file:
+        return(dictionary_list(file))
 
 
+# Задача №2
 
+def get_shop_list_by_dishes(dishes, person_count):
+    resalt = {}
+    cook_book = open_recipes()
+    
+    for dish in dishes:
+        ingredient_list = cook_book[dish]
+        for ingredient in ingredient_list:
+                ingredient['quantity'] = str(int(ingredient['quantity']) * int(person_count)) 
+                if ingredient['ingredient_name'] in resalt:
+                    resalt[ingredient['ingredient_name']]['quantity'] = str(int(resalt[ingredient['ingredient_name']]['quantity']) + int(ingredient['quantity']))
+                else:
+                    resalt[ingredient['ingredient_name']] = dict(measure = ingredient['measure'], quantity = ingredient['quantity'])#resalt['ingredient_name']['quantity'])
+    return resalt
+#print(get_shop_list_by_dishes(['Запеченный картофель', 'Омлет', 'Фахитос'], 2))
+get_shop_list_by_dishes(['Запеченный картофель', 'Омлет', 'Фахитос'], 2)
 
