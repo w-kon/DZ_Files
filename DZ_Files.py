@@ -28,12 +28,12 @@ def get_shop_list_by_dishes(dishes, person_count):
     for dish in dishes:
         ingredient_list = cook_book[dish]
         for ingredient in ingredient_list:
-                ingredient['quantity'] = str(int(ingredient['quantity']) * int(person_count)) 
                 if ingredient['ingredient_name'] in resalt:
-                    resalt[ingredient['ingredient_name']]['quantity'] = str(int(resalt[ingredient['ingredient_name']]['quantity']) + int(ingredient['quantity']))
+                    resalt[ingredient['ingredient_name']]['quantity'] = str(int(resalt[ingredient['ingredient_name']]['quantity']) + int(ingredient['quantity']) * int(person_count))
                 else:
-                    resalt[ingredient['ingredient_name']] = dict(measure = ingredient['measure'], quantity = ingredient['quantity'])#resalt['ingredient_name']['quantity'])
+                    resalt[ingredient['ingredient_name']] = dict(measure = ingredient['measure'], quantity = str(int(ingredient['quantity']) * int(person_count)))
     return resalt
 #print(get_shop_list_by_dishes(['Запеченный картофель', 'Омлет', 'Фахитос'], 2))
-get_shop_list_by_dishes(['Запеченный картофель', 'Омлет', 'Фахитос'], 2)
+#get_shop_list_by_dishes(['Запеченный картофель', 'Омлет', 'Фахитос'], 2)
+(get_shop_list_by_dishes(['Омлет', 'Омлет'], 2))
 
